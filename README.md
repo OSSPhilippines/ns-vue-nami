@@ -104,7 +104,7 @@ this.$nami.navigate('cat-component', {name: 'Kidlat', color: 'Black'});
 ```
 
 ```vue
-<button @tap="$nami.navigate('cat-component', {name: 'Kidlat', color: 'Black'}">View Cat</button>
+<button @tap="$nami.navigate('cat-component', {name: 'Kidlat', color: 'Black'})">View Cat</button>
 ```
 
 **.back()** 
@@ -132,5 +132,5 @@ this.$nami.modal('cat-component', {name: 'Kidlat', color: 'Black'});
 ```
 
 ```vue
-<button @tap="$nami.modal('cat-component', {name: 'Kidlat', color: 'Black'}">View Cat in a Modal</button>
+<button @tap="$nami.modal('cat-component', {name: 'Kidlat', color: 'Black'})">View Cat in a Modal</button>
 ```
