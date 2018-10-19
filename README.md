@@ -1,7 +1,7 @@
 # ns-vue-nami
 Router companion for Nativescript-Vue 2.0's Manual Routing.
 
-Yep, that's her. Nami from One Piece. Why? Coz she's a navigator. My kind of navigator. ;)
+Yep, that's her, Nami from One Piece. Why? Coz she's a navigator.
 
 ## Installation
 
@@ -53,15 +53,15 @@ vm.$nami.register([
 Just invoke the router in your `main.js`
 
 ```javascript
-import './router/router';
+import './router';
 ```
 
-## Recommended Usage
+## Sample Usage
 
 **From the template**
 
 ```vue
-<button @tap="$nami.navigate({name: 'foo'})">Go to foo</button>
+<button @tap="$nami.navigate('foo')">Go to foo</button>
 ```
 
 **From script**
@@ -70,7 +70,7 @@ import './router/router';
 export default {
   methods: {
     someFunc() {
-      this.$nami.navigate({name: 'bar'});
+      this.$nami.navigate('bar');
     }
   }
 }
@@ -78,11 +78,59 @@ export default {
 
 ## API
 
-> **.navigate({name: '', props: {}})**
+**.register()**
 
-Navigates to a given route.
+> Registers all the routable components across the whole app.
 
-| Property | Type | Required | Description |
-| -------- | ---- | -------- | ----------- |
-| `name` | String | Yes | Name of the registered route to be navigated to. | 
-| `props` | Object | No | Optional `props` to be passed to the destination component. |
+```javascript
+import cat from '~/components/cat';
+
+vm.$nami.register([
+  {
+    name: 'cat-component',
+    component: cat
+  }
+])
+```
+
+**.navigate()**
+
+```javascript
+// Basic
+this.$nami.navigate('cat-component');
+
+// With props
+this.$nami.navigate('cat-component', {name: 'Kidlat', color: 'Black'});
+```
+
+```vue
+<button @tap="$nami.navigate('cat-component', {name: 'Kidlat', color: 'Black'}">View Cat</button>
+```
+
+**.back()** 
+
+> Goes back to the previous component.
+
+```javascript
+this.$nami.back();
+```
+
+```vue
+<button @tap="$nami.back()">Go back</button>
+```
+
+**.showModal()** 
+
+> Just like `.navigate()` but shows the component on a modal.
+
+```javascript
+// Basic
+this.$nami.modal('cat-component');
+
+// With props
+this.$nami.modal('cat-component', {name: 'Kidlat', color: 'Black'});
+```
+
+```vue
+<button @tap="$nami.modal('cat-component', {name: 'Kidlat', color: 'Black'}">View Cat in a Modal</button>
+```
