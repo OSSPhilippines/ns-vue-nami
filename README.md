@@ -15,7 +15,7 @@ Yep, that's her, Nami from One Piece. Why? Coz she's a navigator.
 
 ## Recommended Implementation
 
-Create a `router` folder with in an `index.js` file within your `app` folder.
+Create a `router` folder with an `index.js` file within your `app` folder.
 ```
 app
 |- components
