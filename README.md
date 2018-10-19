@@ -11,7 +11,7 @@ Yep, that's her, Nami from One Piece. Why? Coz she's a navigator.
 
 **yarn**
 
-`yarn add nami`
+`yarn add ns-vue-nami`
 
 ## Recommended Implementation
 
