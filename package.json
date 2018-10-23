@@ -1,6 +1,6 @@
 {
   "name": "ns-vue-nami",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Router companion for Nativescript-Vue 2.0's Manual Routing.",
   "main": "index.js",
   "scripts": {
