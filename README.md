@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/jofftiquez/ns-vue-nami.svg?style=shield)](https://circleci.com/gh/jofftiquez/ns-vue-nami)
+
 # ns-vue-nami
 Router companion for Nativescript-Vue 2.0's Manual Routing.
 
@@ -119,7 +121,7 @@ this.$nami.back();
 <button @tap="$nami.back()">Go back</button>
 ```
 
-**.showModal()** 
+**.modal()** 
 
 > Just like `.navigate()` but shows the component on a modal.
 
