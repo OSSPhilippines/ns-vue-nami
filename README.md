@@ -31,7 +31,7 @@ import NsVueRouter from 'ns-vue-nami';
 import foo from '~/components/foo';
 import bar from '~/components/bar';
 
-Vue.use(NsVueNami);
+Vue.use(NsVueRouter);
 
 const vm = new Vue();
 
