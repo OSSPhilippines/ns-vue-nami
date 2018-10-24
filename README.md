@@ -68,12 +68,16 @@ Just invoke the router in your `main.js`.
 
 ```javascript
 import entry from './router';
+import "@babel/polyfill";
 
 new Vue({
   store,
   render: h => h('frame', [h(entry)])
 }).$start();
 ```
+
+**Please note the import of the `babel/polyfill` above, this might be necessary to avoid this bug:
+`NativeScript encountered a fatal error: ReferenceError: Can't find variable: regeneratorRuntime` you can install the polyfill by running `npm install --save-dev @babel/polyfill` and importing it as seen above.**
 
 ## Sample Usage
 
