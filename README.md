@@ -1,4 +1,4 @@
-# ns-vue-nami
+# ns-vue-nami [![CircleCI](https://circleci.com/gh/jofftiquez/ns-vue-nami.svg?style=shield)](https://circleci.com/gh/jofftiquez/ns-vue-nami)
 Router companion for Nativescript-Vue 2.0's Manual Routing.
 
 Yep, that's her, Nami from One Piece. Why? Coz she's a navigator.
