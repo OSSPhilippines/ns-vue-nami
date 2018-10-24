@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/jofftiquez/ns-vue-nami.svg?style=shield)](https://circleci.com/gh/jofftiquez/ns-vue-nami)
-
 # ns-vue-nami
 Router companion for Nativescript-Vue 2.0's Manual Routing.
 
@@ -29,33 +27,40 @@ app
 
 ```javascript
 import Vue from 'nativescript-vue';
-import NsVueRouter from 'ns-vue-nami';
+import NsVueNami from 'ns-vue-nami';
 import foo from '~/components/foo';
 import bar from '~/components/bar';
 
-Vue.use(NsVueRouter);
+Vue.use(NsVueNami);
 
 const vm = new Vue();
 
 // register all routes here.
-vm.$nami.register([
-  {
-    name: 'foo',
-    component: foo
-  },
-  {
-    name: 'bar',
-    component: bar
-  }
-]);
+vm.$nami.init({
+  routes: [
+    {
+      name: 'foo',
+      component: foo
+    },
+    {
+      name: 'bar',
+      component: bar
+    }
+  ]
+});
 ```
 
 **main.js**
 
-Just invoke the router in your `main.js`
+Just invoke the router in your `main.js`.
 
 ```javascript
-import './router';
+import entry from './router';
+
+new Vue({
+  store,
+  render: h => h('frame', [h(entry)])
+}).$start();
 ```
 
 ## Sample Usage
@@ -80,19 +85,87 @@ export default {
 
 ## API
 
+**.init()**
+
+> Sets all the routable components across the whole app.
+> Returns the entry component to be used in main.js as frame entry.
+
+Router properties:
+1. `name: String` - The component name of your choice.
+2. `component: Vue component` - The vue component.
+3. `noAuth: Boolean: default - false` - The component will NOT require authentication if set to true.
+4. `entry: Boolean` - Set a particular component as entry point.
+
+```javascript
+import login from '~/components/login';
+import dashboard from '~/components/dashboard';
+
+vm.$nami.init({
+  routes: [
+    {
+      name: 'login',
+      component: login,
+      entry: true
+    },
+    {
+      name: 'dashboard',
+      component: dashboard
+    }
+  ]
+})
+```
+
+**.authGuard()**
+
+> Will decide whether the component is routable or not based on authentication status.
+
+```javascript
+import Vue from 'nativescript-vue';
+import NsVueNami from '../plugins/ns-vue-nami';
+
+import login from '~/components/login';
+import dashboard from '~/components/dashboard';
+
+// Dummy authentication status.
+const isAuthenticated = true;
+
+Vue.use(NsVueNami);
+
+const vm = new Vue();
+
+vm.$nami.authGuard((next) => {
+  if(isAuthenticated) {
+    next();
+  } else {
+    next('login');
+  }
+});
+
+export default vm.$nami.init({
+  routes: [
+    {
+      name: 'login',
+      component: login,
+      noAuth: true,
+      entry: !isAuthenticated // login will be the entry if isAuthenticated is false
+    },
+    {
+      name: 'dashboard',
+      component: dashboard,
+      entry: isAuthenticated // dashboard will be the entry if isAuthenticated is true
+    }
+  ]
+});
+```
+
 **.register()**
 
-> Registers all the routable components across the whole app.
+> Adds a new route to the list of routes on the fly.
 
 ```javascript
 import cat from '~/components/cat';
 
-vm.$nami.register([
-  {
-    name: 'cat-component',
-    component: cat
-  }
-])
+vm.$nami.register({name: 'cat', component: cat});
 ```
 
 **.navigate()**
@@ -109,18 +182,6 @@ this.$nami.navigate('cat-component', {name: 'Kidlat', color: 'Black'});
 <button @tap="$nami.navigate('cat-component', {name: 'Kidlat', color: 'Black'})">View Cat</button>
 ```
 
-**.back()** 
-
-> Goes back to the previous component.
-
-```javascript
-this.$nami.back();
-```
-
-```vue
-<button @tap="$nami.back()">Go back</button>
-```
-
 **.modal()** 
 
 > Just like `.navigate()` but shows the component on a modal.
@@ -135,4 +196,16 @@ this.$nami.modal('cat-component', {name: 'Kidlat', color: 'Black'});
 
 ```vue
 <button @tap="$nami.modal('cat-component', {name: 'Kidlat', color: 'Black'})">View Cat in a Modal</button>
+```
+
+**.back()** 
+
+> Goes back to the previous component.
+
+```javascript
+this.$nami.back();
+```
+
+```vue
+<button @tap="$nami.back()">Go back</button>
 ```
