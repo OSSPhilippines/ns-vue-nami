@@ -8,7 +8,7 @@ export const init = (options) => {
   routes = options.routes || [];
   let entry = routes.find(route => route.entry);
   if(!entry) {
-    console.warn('No entry component sepecified. Deafaulting to first component in routes array.');
+    console.warn('No entry component sepecified. Defaulting to first component in routes array.');
     entry = routes[0];
   }
   return entry.component;
