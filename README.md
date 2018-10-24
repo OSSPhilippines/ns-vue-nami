@@ -67,8 +67,8 @@ vm.$nami.init({
 Just invoke the router in your `main.js`.
 
 ```javascript
+import '@babel/polyfill';
 import entry from './router';
-import "@babel/polyfill";
 
 new Vue({
   store,
