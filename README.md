@@ -28,23 +28,35 @@ app
 ```javascript
 import Vue from 'nativescript-vue';
 import NsVueNami from 'ns-vue-nami';
-import foo from '~/components/foo';
-import bar from '~/components/bar';
+import login from '~/components/login';
+import dashboard from '~/components/dashboard';
+import isAuthenticated from 'some-authentication-module';
 
 Vue.use(NsVueNami);
 
 const vm = new Vue();
 
+vm.$nami.authGuard((next) => {
+  if(isAuthenticated) {
+    next();
+  } else {
+    next('login');
+  }
+});
+
 // register all routes here.
 vm.$nami.init({
   routes: [
     {
-      name: 'foo',
-      component: foo
+      name: 'login',
+      component: login,
+      noAuth: true,
+      entry: !isAuthenticated
     },
     {
-      name: 'bar',
-      component: bar
+      name: 'dashboard',
+      component: dashboard,
+      entry: isAuthenticated
     }
   ]
 });
